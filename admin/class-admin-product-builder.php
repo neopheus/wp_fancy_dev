@@ -184,91 +184,97 @@ if( !class_exists('FPD_Admin_Product_Builder') ) {
 
 				<!-- Product Stage -->
 				<div class="fpd-panel">
-
-					<div id="fpd-edit-parameters">
-						<?php require_once(FPD_PLUGIN_ADMIN_DIR.'/views/html-product-builder-parameters-form.php'); ?>
+					<div id="fdp-panel-left">
+						<div id="fpd-edit-parameters">
+							<?php require_once(FPD_PLUGIN_ADMIN_DIR.'/views/html-product-builder-parameters-form.php'); ?>
+						</div>
 					</div>
 
-					<h3><?php _e('Canvas', 'radykal'); ?>
-						<span class="description">
-							<span id="fpd-stage-width-label"><?php echo $stage_width; ?></span>px *
-							<span id="fpd-stage-height-label"><?php echo $stage_height; ?></span>px
-						</span>
-					</h3>
+					<div id="fdp-panel-right">
 
-					<div class="fpd-clearfix">
+						<h3><?php _e('Canvas', 'radykal'); ?>
+							<span class="description">
+								<span id="fpd-stage-width-label"><?php echo $stage_width; ?></span>px *
+								<span id="fpd-stage-height-label"><?php echo $stage_height; ?></span>px
+							</span>
+						</h3>
 
-						<div id="fpd-element-toolbar" class="fpd-left">
-							<span id="fpd-undo" class="fpd-admin-tooltip radykal-disabled" title="<?php _e('Undo', 'radykal'); ?>">
-								<i class="fpd-admin-icon-undo"></i>
-							</span>
-							<span id="fpd-redo" class="fpd-admin-tooltip radykal-disabled" title="<?php _e('Redo', 'radykal'); ?>">
-								<i class="fpd-admin-icon-redo"></i>
-							</span>
-							<span id="fpd-center-horizontal" class="fpd-admin-tooltip radykal-disabled fpd-element-toggle" title="<?php _e('Center Horizontal', 'radykal'); ?>">
-								<i class="fpd-admin-icon-align-horizontal-middle"></i>
-							</span>
-							<span id="fpd-center-vertical" class="fpd-admin-tooltip radykal-disabled fpd-element-toggle" title="<?php _e('Center Vertical', 'radykal'); ?>">
-								<i class="fpd-admin-icon-align-vertical-middle"></i>
-							</span>
-							<span id="fpd-ruler" class="fpd-admin-tooltip" title="<?php _e('Ruler', 'radykal'); ?>" data-action="ruler">
-								<i class="fpd-admin-icon-ruler"></i>
-							</span>
-							<div class="fpd-button-modal">
-								<span id="fpd-edit-mask" class="fpd-toolbar-btn fpd-toggle"><?php _e( 'Edit Mask', 'radykal' ); ?></span>
-								<div id="fpd-mask-toolbar" class="fpd-dialog">
-									<p class="description"><?php _e('Use a SVG with one path as mask.', 'radykal'); ?></p>
-									<table>
-										<tr>
-											<td>
-												<?php _e( 'Image URL', 'radykal' ); ?>
-											</td>
-											<td>
-												<div class="fpd-single-image-upload">
-													<span class="fpd-remove"><span class="dashicons dashicons-minus"></span></span>
-													<input type="hidden" name="url" />
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td><?php _e( 'Left', 'radykal' ); ?></td>
-											<td><input type="number" name="left" placeholder="0" min="0" /></td>
-										</tr>
-										<tr>
-											<td><?php _e( 'Top', 'radykal' ); ?></td>
-											<td><input type="number" name="top" placeholder="0" min="0" /></td>
-										</tr>
-										<tr>
-											<td><?php _e( 'Scale-X', 'radykal' ); ?></td>
-											<td><input type="number" name="scaleX" placeholder="1" min="0" step="0.01" /></td>
-										</tr>
-										<tr>
-											<td><?php _e( 'Scale-Y', 'radykal' ); ?></td>
-											<td><input type="number" name="scaleY" placeholder="1" min="0" step="0.01" /></td>
-										</tr>
-									</table>
-									<button id="fpd-save-mask-options" class="button-secondary"><?php _e( 'Save', 'radykal' ); ?></button>
-									<div class="fpd-ui-blocker"></div>
+						<div class="fpd-clearfix">
+
+							<div id="fpd-element-toolbar" class="fpd-left">
+								<span id="fpd-undo" class="fpd-admin-tooltip radykal-disabled" title="<?php _e('Undo', 'radykal'); ?>">
+									<i class="fpd-admin-icon-undo"></i>
+								</span>
+								<span id="fpd-redo" class="fpd-admin-tooltip radykal-disabled" title="<?php _e('Redo', 'radykal'); ?>">
+									<i class="fpd-admin-icon-redo"></i>
+								</span>
+								<span id="fpd-center-horizontal" class="fpd-admin-tooltip radykal-disabled fpd-element-toggle" title="<?php _e('Center Horizontal', 'radykal'); ?>">
+									<i class="fpd-admin-icon-align-horizontal-middle"></i>
+								</span>
+								<span id="fpd-center-vertical" class="fpd-admin-tooltip radykal-disabled fpd-element-toggle" title="<?php _e('Center Vertical', 'radykal'); ?>">
+									<i class="fpd-admin-icon-align-vertical-middle"></i>
+								</span>
+								<span id="fpd-ruler" class="fpd-admin-tooltip" title="<?php _e('Ruler', 'radykal'); ?>" data-action="ruler">
+									<i class="fpd-admin-icon-ruler"></i>
+								</span>
+								<div class="fpd-button-modal">
+									<span id="fpd-edit-mask" class="fpd-toolbar-btn fpd-toggle"><?php _e( 'Edit Mask', 'radykal' ); ?></span>
+									<div id="fpd-mask-toolbar" class="fpd-dialog">
+										<p class="description"><?php _e('Use a SVG with one path as mask.', 'radykal'); ?></p>
+										<table>
+											<tr>
+												<td>
+													<?php _e( 'Image URL', 'radykal' ); ?>
+												</td>
+												<td>
+													<div class="fpd-single-image-upload">
+														<span class="fpd-remove"><span class="dashicons dashicons-minus"></span></span>
+														<input type="hidden" name="url" />
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td><?php _e( 'Left', 'radykal' ); ?></td>
+												<td><input type="number" name="left" placeholder="0" min="0" /></td>
+											</tr>
+											<tr>
+												<td><?php _e( 'Top', 'radykal' ); ?></td>
+												<td><input type="number" name="top" placeholder="0" min="0" /></td>
+											</tr>
+											<tr>
+												<td><?php _e( 'Scale-X', 'radykal' ); ?></td>
+												<td><input type="number" name="scaleX" placeholder="1" min="0" step="0.01" /></td>
+											</tr>
+											<tr>
+												<td><?php _e( 'Scale-Y', 'radykal' ); ?></td>
+												<td><input type="number" name="scaleY" placeholder="1" min="0" step="0.01" /></td>
+											</tr>
+										</table>
+										<button id="fpd-save-mask-options" class="button-secondary"><?php _e( 'Save', 'radykal' ); ?></button>
+										<div class="fpd-ui-blocker"></div>
+									</div>
 								</div>
+
+							</div>
+
+							<div class="fpd-left" style="margin-left: 60px; padding-top: 8px;">
+
+								<label class="radykal-clearfix fpd-admin-tooltip" title="<?php _e( 'Only a helper tool for this product builder, does not influence the frontend!', 'radykal' ); ?>">
+									<span class="description fpd-left" style="margin-right: 10px;"><?php _e( 'Responsive', 'radykal' ); ?></span>
+									<div class="radykal-onoffswitch fpd-left">
+									    <input type="checkbox" class="radykal-onoffswitch-checkbox" id="fpd-responsive-stage-switch" >
+									    <label class="radykal-onoffswitch-label" for="fpd-responsive-stage-switch"></label>
+									</div>
+								</label>
+
 							</div>
 
 						</div>
 
-						<div class="fpd-left" style="margin-left: 60px; padding-top: 8px;">
-
-							<label class="radykal-clearfix fpd-admin-tooltip" title="<?php _e( 'Only a helper tool for this product builder, does not influence the frontend!', 'radykal' ); ?>">
-								<span class="description fpd-left" style="margin-right: 10px;"><?php _e( 'Responsive', 'radykal' ); ?></span>
-								<div class="radykal-onoffswitch fpd-left">
-								    <input type="checkbox" class="radykal-onoffswitch-checkbox" id="fpd-responsive-stage-switch" >
-								    <label class="radykal-onoffswitch-label" for="fpd-responsive-stage-switch"></label>
-								</div>
-							</label>
-
-						</div>
+						<div id="fpd-preview-wrapper" data-stagewidth="<?php echo $stage_width; ?>" data-stageheight="<?php echo $stage_height; ?>" data-viewid="<?php echo $request_view_id; ?>" data-viewmask='<?php echo $mask_options; ?>'></div>
 
 					</div>
-
-					<div id="fpd-preview-wrapper" data-stagewidth="<?php echo $stage_width; ?>" data-stageheight="<?php echo $stage_height; ?>" data-viewid="<?php echo $request_view_id; ?>" data-viewmask='<?php echo $mask_options; ?>'></div>
+					<div class="fpd-clearfix"></div>
 
 				</div>
 
