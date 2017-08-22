@@ -117,6 +117,8 @@ if(!class_exists('FPD_Cart')) {
 				//PLUS
 				if( isset($_POST['fpd_bulk_variations_order']) && !empty($_POST['fpd_bulk_variations_order']))
 					$cart_item_meta['fpd_data']['fpd_bulk_variations_order'] = $_POST['fpd_bulk_variations_order'];
+				
+				$cart_item_meta['fpd_data']['fpd_product_svg'] = $_POST['fpd_product_svg'];
 
 			}
 

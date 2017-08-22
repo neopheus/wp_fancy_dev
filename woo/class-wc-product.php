@@ -306,13 +306,15 @@ if( !class_exists('FPD_WC_Product') ) {
 
 
 							var tempDevicePixelRation = fabric.devicePixelRatio,
-								viewOpts = fancyProductDesigner.viewInstances[0].options,
-								multiplier = FPDUtil.getScalingByDimesions(viewOpts.stageWidth, viewOpts.stageHeight, <?php echo fpd_get_option('fpd_wc_cart_thumbnail_width'); ?>, <?php echo fpd_get_option('fpd_wc_cart_thumbnail_height'); ?>);
+								viewOpts = fancyProductDesigner.viewInstances[0].options/*,
+								multiplier = FPDUtil.getScalingByDimesions(viewOpts.stageWidth, viewOpts.stageHeight, <?php echo fpd_get_option('fpd_wc_cart_thumbnail_width'); ?>, <?php echo fpd_get_option('fpd_wc_cart_thumbnail_height'); ?>)*/;
 
 							fabric.devicePixelRatio = 1;
 							fancyProductDesigner.viewInstances[0].toDataURL(function(dataURL) {
 
 								$cartForm.find('input[name="fpd_product"]').val(JSON.stringify(order));
+
+                                $cartForm.find('input[name="fpd_product_svg"]').val(fancyProductDesigner.viewInstances[0].toSVG());
 
 								if(<?php echo fpd_get_option('fpd_cart_custom_product_thumbnail'); ?>) {
 									$cartForm.find('input[name="fpd_product_thumbnail"]').val(dataURL);
@@ -327,7 +329,7 @@ if( !class_exists('FPD_WC_Product') ) {
 
 								fabric.devicePixelRatio = tempDevicePixelRation;
 
-							}, 'transparent', {format: 'png', multiplier: multiplier})
+							}, 'transparent', {format: 'png'/*, multiplier: multiplier*/})
 
 						}
 
@@ -470,6 +472,7 @@ if( !class_exists('FPD_WC_Product') ) {
 				<input type="hidden" value="" name="fpd_product" />
 				<input type="hidden" value="" name="fpd_product_price" />
 				<input type="hidden" value="" name="fpd_product_thumbnail" />
+                <input type="hidden" value="" name="fpd_product_svg" />
 				<input type="hidden" value="<?php echo isset($_GET['cart_item_key']) ? $_GET['cart_item_key'] : ''; ?>" name="fpd_remove_cart_item" />
 				<?php
 

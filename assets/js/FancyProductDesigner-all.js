@@ -5419,7 +5419,7 @@ var FPDToolbar = function($uiElementToolbar, fpdInstance) {
 						$colorPicker.empty().removeClass('fpd-colorpicker-group');
 
 						//path (svg)
-						if(element.type == 'path-group') {
+						if(element.type == 'path-group' && !element.isSameColor()) {
 
 							for(var i=0; i<element.paths.length; ++i) {
 								var path = element.paths[i],
@@ -5523,7 +5523,6 @@ var FPDToolbar = function($uiElementToolbar, fpdInstance) {
 
 									$(document).unbind("click.spectrum"); //fix, otherwise change is fired on every click
 									fpdInstance.currentViewInstance.setElementParameters({fill: color.toHexString()}, element);
-
 								}
 							})
 							.on('dragstart.spectrum', function() {
@@ -7915,7 +7914,7 @@ var LayersModule = {
 				if(element.uploadZone) {
 					colorHtml = '<span></span>';
 				}
-				else if(element.type == 'path-group') {
+				else if(element.type == 'path-group' && !element.isSameColor()) {
 					currentColor = availableColors[0];
 					colorHtml = '<span class="fpd-current-color" style="background: '+currentColor+'"></span>';
 				}
@@ -8017,24 +8016,29 @@ var LayersModule = {
 			preferredFormat: "hex",
 			showInput: true,
 			showInitial: true,
-			showPalette: fpdInstance.mainOptions.colorPickerPalette && fpdInstance.mainOptions.colorPickerPalette.length > 0,
-			palette: fpdInstance.mainOptions.colorPickerPalette,
+            showPalette: true,
+            hideAfterPaletteSelect:true,
+            palette: [
+                ['#000000','#8e9194','#e0dbd7','#ffffff','#ffbe98','#e8cab8','#f9e2c5','#ffe08f','#f0b56f','#f8a800','#bc5a00','#5e3327','#e13010','#da1a30','#9a0043','#f96c64','#fe7887','#ff96a9','#f2a1c9','#e578b5','#ab57c5','#6720a5','#004f8b','#007ebb','#82a2c8','#6ccfdc','#ccf4ec','#00aeac','#a8c89b','#f5f4a0','#065a42','#68c100','#00a852']
+            ],
+            /*
+            showPalette: fpdInstance.mainOptions.colorPickerPalette && fpdInstance.mainOptions.colorPickerPalette.length > 0,
+            palette: fpdInstance.mainOptions.colorPickerPalette,*/
 			showButtons: false,
 			show: function(color) {
 				var element = $(this).parents('.fpd-list-row:first').data('element');
 				element._tempFill = color.toHexString();
 			},
 			move: function(color) {
-
 				var element = $(this).parents('.fpd-list-row:first').data('element');
 				//only non-png images are chaning while dragging
 				if(colorDragging === false || FPDUtil.elementIsColorizable(element) !== 'png') {
-					fpdInstance.currentViewInstance.changeColor(element, color.toHexString());
+                    fpdInstance.currentViewInstance.setElementParameters({fill: color.toHexString()}, element);
+					//fpdInstance.currentViewInstance.changeColor(element, color.toHexString());
 				}
 
 			},
 			change: function(color) {
-
 				$(document).unbind("click.spectrum"); //fix, otherwise change is fired on every click
 				var element = $(this).parents('.fpd-list-row:first').data('element');
 				fpdInstance.currentViewInstance.setElementParameters({fill: color.toHexString()}, element);
@@ -8088,7 +8092,7 @@ var LayersModule = {
 				for(var i=0; i < availableColors.length; ++i) {
 
 					var item;
-					if(element.type === 'path-group') {
+					if(element.type === 'path-group' && !element.isSameColor()) {
 
 						item = '<input class="fpd-path-colorpicker" type="text" value="'+availableColors[i]+'" />';
 
@@ -8107,7 +8111,7 @@ var LayersModule = {
 
 				FPDUtil.updateTooltip($listItem);
 
-				if(element.type === 'path-group') {
+				if(element.type === 'path-group' && !element.isSameColor()) {
 
 					$listItem.find('.fpd-path-colorpicker').spectrum({
 						showPaletteOnly: $.isArray(element.colors),
