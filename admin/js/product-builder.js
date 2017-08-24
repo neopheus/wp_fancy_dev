@@ -432,11 +432,12 @@ jQuery(document).ready(function($) {
                 }     
                 currentElement = object;           
             });
-            //stage.setActiveGroup(new fabric.Group(objectsInGroup));
-            stage.setActiveObject(currentElement);
+            //stage.setActiveGroup(new fabric.Group(objectsInGroup));            
             stage.calcOffset();
             stage.renderAll();
 
+            stage.setActiveObject(currentElement);
+        	currentElement.setCoords();
             _setFormFields(currentElement);
         }
         else if(currentElement) {
