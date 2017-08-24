@@ -2984,10 +2984,10 @@ var FancyProductDesignerView = function($productStage, view, callback, fabricCan
 		var canvas = $productStage.children('canvas:last').get(0),
 			canvasOptions = $.extend({}, {
 				containerClass: 'fpd-view-stage fpd-hidden',
-				selection: false,
+				selection: true,
 				hoverCursor: 'pointer',
 				controlsAboveOverlay: true,
-				centeredScaling: true,
+				centeredScaling: false,
 				allowTouchScrolling: true,
 				preserveObjectStacking: true
 			}, fabricCanvasOptions);

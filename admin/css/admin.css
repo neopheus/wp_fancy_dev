@@ -1599,7 +1599,12 @@ fpd-wc-order #fpd-order-panel {
 
 #fdp-panel-left,
 #fdp-panel-right {
-    width: 700px;
+    width: 50%;
     display: block;
     float: left;
+}
+
+#fdp-panel-right {
+    min-width: 750px;
+    float: right;
 }

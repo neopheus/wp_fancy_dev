@@ -408,8 +408,38 @@ jQuery(document).ready(function($) {
 
 		evt.preventDefault();
 
-		var currentElement = stage.getActiveObject();
-		if(currentElement) {
+		var currentElement = stage.getActiveObject(),
+			activeGroup = stage.getActiveGroup();
+
+
+        if (activeGroup) {
+            var objectsInGroup = activeGroup.getObjects(), currentCenterPoint, newPoint, originPoint, position;             
+            stage.deactivateAllWithDispatch();
+        	if($(this).attr('id') == 'fpd-center-horizontal') {
+            	position = 'centerHorizontal';
+            }else{
+            	position = 'centerVertical';
+            }
+            objectsInGroup.forEach(function(object) {
+                currentCenterPoint = object.getCenterPoint();
+                switch (position) {            
+                    case 'centerHorizontal':
+                        object.set('left', activeGroup.left + activeGroup.getBoundingRectWidth() / 2 /*- (object.getBoundingRectWidth() * object.scaleX) / 2 */);
+                        break;
+                    case 'centerVertical':
+                        object.set('top', activeGroup.top + activeGroup.getBoundingRectHeight() / 2 /*- object.scaleY * object.getBoundingRectHeight() / 2*/);
+                        break;
+                }     
+                currentElement = object;           
+            });
+            //stage.setActiveGroup(new fabric.Group(objectsInGroup));
+            stage.setActiveObject(currentElement);
+            stage.calcOffset();
+            stage.renderAll();
+
+            _setFormFields(currentElement);
+        }
+        else if(currentElement) {
 
 			if($(this).attr('id') == 'fpd-center-horizontal') {
 				fancyProductDesigner.currentViewInstance.centerElement(true);
