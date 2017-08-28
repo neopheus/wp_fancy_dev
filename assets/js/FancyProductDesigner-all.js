@@ -1508,7 +1508,8 @@ var FPDUtil =  {
 			for(var i=0; i<element.paths.length; ++i) {
 				var path = element.paths[i],
 					color = tinycolor(path.fill);
-				availableColors.push(color.toHexString());
+				if(availableColors.indexOf(color.toHexString()) == -1)
+					availableColors.push(color.toHexString());
 			}
 
 		}
@@ -7911,10 +7912,11 @@ var LayersModule = {
 				var availableColors = FPDUtil.elementAvailableColors(element, fpdInstance);
 
 				var currentColor = '';
+				
 				if(element.uploadZone) {
 					colorHtml = '<span></span>';
 				}
-				else if(element.type == 'path-group' && !element.isSameColor()) {
+				else if(element.type == 'path-group' && (element.isSameColor && !element.isSameColor())) {
 					currentColor = availableColors[0];
 					colorHtml = '<span class="fpd-current-color" style="background: '+currentColor+'"></span>';
 				}
